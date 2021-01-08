@@ -29,3 +29,9 @@ struct Stack<Element> {
     }
 }
 
+/// Adds conformance to `ExpressibleByArrayLiteral`, which allows assigning an array directly to the stack
+extension Stack: ExpressibleByArrayLiteral {
+    init(arrayLiteral elements: Element...) {
+        self.array = elements
+    }
+}
