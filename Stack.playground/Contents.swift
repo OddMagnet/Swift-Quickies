@@ -56,3 +56,14 @@ extension Stack: CustomDebugStringConvertible {
         return result
     }
 }
+
+/// Add conformance to Equatable and Hashable
+extension Stack: Equatable where Element: Equatable {}
+extension Stack: Hashable where Element: Hashable {}
+
+/// Add conformances for Codable
+/// Seperating Encodable and Decodable so the Stack can be Decodable if the Element is only Decodable
+/// or Encodable if the Element is only Encodable, instead of loosing both.
+/// If the Element's type conforms to both, the Stack will as well
+extension Stack: Decodable where Element: Decodable {}
+extension Stack: Encodable where Element: Encodable {}
