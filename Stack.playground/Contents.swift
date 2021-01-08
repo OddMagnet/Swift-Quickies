@@ -67,3 +67,19 @@ extension Stack: Hashable where Element: Hashable {}
 /// If the Element's type conforms to both, the Stack will as well
 extension Stack: Decodable where Element: Decodable {}
 extension Stack: Encodable where Element: Encodable {}
+
+/// Add initializer for Stacks to Array
+extension Array {
+    init<T>(_ stack: Stack<T>) where Element == T {
+        self.init()
+        var workingCopy = stack
+        var element = workingCopy.pop()
+
+        while element != nil {
+            self.append(element!)
+            element = workingCopy.pop()
+        }
+
+        self.reverse()
+    }
+}
