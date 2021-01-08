@@ -27,6 +27,11 @@ struct Stack<Element> {
     func peek() -> Element? {
         array.last
     }
+
+    /// Removes all elements from the stack
+    mutating func removeAll() {
+        array = [Element]()
+    }
 }
 
 /// Adds conformance to `ExpressibleByArrayLiteral`, which allows assigning an array directly to the stack
@@ -58,7 +63,11 @@ extension Stack: CustomDebugStringConvertible {
 }
 
 /// Add conformance to Equatable and Hashable
-extension Stack: Equatable where Element: Equatable {}
+extension Stack: Equatable where Element: Equatable {
+    func contains(_ element: Element) -> Bool {
+        array.contains(element)
+    }
+}
 extension Stack: Hashable where Element: Hashable {}
 
 /// Add conformances for Codable
