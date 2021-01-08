@@ -35,3 +35,24 @@ extension Stack: ExpressibleByArrayLiteral {
         self.array = elements
     }
 }
+
+/// Adds conformance to `CustomDebugStringConvertible`, which helps stopping leaking of the internal array,
+/// by customizing how a variable of the `Stack` type is printed
+extension Stack: CustomDebugStringConvertible {
+    var debugDescription: String {
+        var result = "["
+        var firstElement = true
+
+        for element in array {
+            if firstElement { firstElement = false }
+            else { result += ", " }
+
+            // get the debug representation of the variable
+            // and 'print' it to the result variable
+            debugPrint(element, terminator: "", to: &result)
+        }
+
+        result += "]"
+        return result
+    }
+}
