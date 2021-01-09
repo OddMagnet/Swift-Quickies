@@ -10,8 +10,12 @@ class LinkedListNode<Element> {
     }
 }
 
-class LinkedList<Element>: ExpressibleByArrayLiteral {
+class LinkedList<Element>: ExpressibleByArrayLiteral, Sequence {
     var start: LinkedListNode<Element>?
+
+    init(start: LinkedListNode<Element>) {
+        self.start = start
+    }
 
     required public init(arrayLiteral elements: Element...) {
         for element in elements.reversed() {
@@ -25,5 +29,19 @@ class LinkedList<Element>: ExpressibleByArrayLiteral {
         for element in array.reversed() {
             start = LinkedListNode(value: element, next: start)
         }
+    }
+
+    func makeIterator() -> LinkedListIterator<Element> {
+        LinkedListIterator(current: start)
+    }
+}
+
+struct LinkedListIterator<Element>: IteratorProtocol {
+    var current: LinkedListNode<Element>?
+
+    mutating func next() -> LinkedListNode<Element>? {
+        // ensure that current doesn't change until after it's returned
+        defer { current = current?.next }
+        return current
     }
 }
