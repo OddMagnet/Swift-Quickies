@@ -20,4 +20,10 @@ class LinkedList<Element>: ExpressibleByArrayLiteral {
             start = LinkedListNode(value: element, next: start)
         }
     }
+
+    init(array: Array<Element>) {
+        for element in array.reversed() {
+            start = LinkedListNode(value: element, next: start)
+        }
+    }
 }
