@@ -44,4 +44,21 @@ struct Deque<Element> {
     }
 }
 
+extension Deque where Element: Equatable {
+    // using inlinable would give a small performance boost at the cost
+    // of a slightly increased binary. Instead of a function calling a
+    // function the compiler would place the contents of the called function
+    // directly into this one. Since Apple's implementation is unlikely
+    // to change won't cause any problems later on
+    // (especially not since this is just a playground for practice)
+    @inlinable
+    func firstIndex(of element: Element) -> Int? {
+        array.firstIndex(of: element)
+    }
+
+    @inlinable
+    func contains(_ element: Element) -> Bool {
+        array.contains(element)
+    }
+}
 
