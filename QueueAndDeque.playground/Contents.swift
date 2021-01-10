@@ -62,3 +62,29 @@ extension Deque where Element: Equatable {
     }
 }
 
+protocol Prioritized {
+    var priority: Int { get }
+}
+
+struct Work<Element>: Prioritized {
+    let data: Element
+    let priority: Int
+}
+
+extension Queue where Element: Prioritized {
+    mutating func dequeue() -> Element? {
+        guard !isEmpty else { return nil }
+
+        var choiceIndex = 0
+        var choice = array[choiceIndex]
+
+        for (index, element) in array.enumerated() {
+            if element.priority > choice.priority {
+                choice = element
+                choiceIndex = index
+            }
+        }
+
+        return array.remove(at: choiceIndex)
+    }
+}
