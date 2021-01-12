@@ -39,6 +39,27 @@ struct OrderedSet<Element: Hashable>: Equatable {
     static func ==(lhs: OrderedSet, rhs: OrderedSet) -> Bool {
         return lhs.array == rhs.array
     }
+
+    // MARK: - Removal functions
+    mutating func removeAll() {
+        set = Set<Element>()
+        array = [Element]()
+    }
+
+    mutating func remove(at index: Int) {
+        guard isEmpty == false else { return }
+        guard index >= count else { return }
+        set.remove(array[index])
+        array.remove(at: index)
+    }
+
+    mutating func removeFirst() {
+        remove(at: 0)
+    }
+
+    mutating func removeLast() {
+        remove(at: count)
+    }
 }
 
 extension OrderedSet: ExpressibleByArrayLiteral {
