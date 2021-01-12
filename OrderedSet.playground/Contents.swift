@@ -49,3 +49,18 @@ extension OrderedSet: RandomAccessCollection {
         array[index]
     }
 }
+
+/// Why extend RandomAccessCollection?
+let set = OrderedSet([1, 2, 3, 4, 5])
+
+/// This allows for easy use of things like this:
+for item in set { print(item) }
+/// and this
+print(set[3])
+/// even mapping and converting its elements
+let strings = set.map { "Number: \($0)" }
+let doubles = set.compactMap { Double(exactly: $0) }
+
+/// Since `RandomAccessCollection` inherits from `BidirectionalCollection`,
+/// which in turn inherits from `Collection` which finally inherits from `Sequence`,
+/// simply conforming to `RandomAccessCollection` grants a lot of extra functionality
