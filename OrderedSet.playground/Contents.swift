@@ -28,7 +28,15 @@ struct OrderedSet<Element: Hashable>: Equatable {
         }
     }
 
+    /// Checks if the ordered set contains a member
+    /// - Parameter member: The member to check for
+    /// - Returns: True if it contains the member, false if not
     func contains(_ member: Element) -> Bool {              // using 'member' as a parameter name since Set's contains function does so as well
         set.contains(member)
+    }
+
+    /// Override the synthesized `==` method so Swift only compared the arrays and not the sets as well
+    static func ==(lhs: OrderedSet, rhs: OrderedSet) -> Bool {
+        return lhs.array == rhs.array
     }
 }
