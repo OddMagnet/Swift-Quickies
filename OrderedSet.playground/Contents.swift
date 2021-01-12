@@ -41,6 +41,14 @@ struct OrderedSet<Element: Hashable>: Equatable {
     }
 }
 
+extension OrderedSet: ExpressibleByArrayLiteral {
+    init(arrayLiteral elements: Element...) {
+        for element in elements {
+            append(element)
+        }
+    }
+}
+
 extension OrderedSet: RandomAccessCollection {
     var startIndex: Int { array.startIndex }
     var endIndex: Int { array.endIndex }
