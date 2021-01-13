@@ -96,7 +96,7 @@ struct Row: View {
     }
 }
 
-struct ContentView: View {
+struct DetailView: View {
     @State private var contact = TestData.contact
 
     var body: some View {
@@ -117,6 +117,12 @@ struct ContentView: View {
                 destination: URL(string: "tel:\(contact.phone)")!
             )
         }
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        DetailView()
     }
 }
 
