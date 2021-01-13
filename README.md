@@ -12,3 +12,6 @@ To experiment with constrained extensions, @inlinable and prioritization
 ## OrderedSet
 To see how an ordered set combined the best of both arrays (fast random access and retaining of their order) and sets (instant access to specific elements, no duplicates),
 without the downsides of either of them (checking for specific items runs in linear time - O(n) - for arrays and sets loosing their order)
+
+## DataFlow
+To explore the different types of data flow in SwiftUI
