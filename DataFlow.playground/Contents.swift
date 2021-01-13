@@ -20,33 +20,103 @@ import PlaygroundSupport
         - @Environment, not editable
     - *Global Object*: e.g. a controller that handles network requests or contains the app state
         - @EnvironmentObject, editable
+ The playground will only commented in places where one of the different Data Flow types is used
  */
 
 struct Contact {
-    var photoName: String
-    var firstName: String
-    var middleName: String?
-    var lastName: String
+    var photo: UIImage
+    var fullName: String
+    var nickName: String
     var email: String
     var phone: String
 }
 
 struct TestData {
     static let contact = Contact(
-        photoName: "person",
-        firstName: "Michael",
-        middleName: nil,
-        lastName: "Brünen",
+        photo: UIImage(systemName: "person")!,
+        fullName: "Michael Brünen",
+        nickName: "OddMagnet",
         email: "oddmagnetdev@gmail.com",
-        phone: "+49 12345 6789"
+        phone: "0123456789"
     )
+}
+
+// MARK: - Shared State, Shared Value, Regular Property
+struct RoundImage: View {
+    // A simple stored property, passed down from another view
+    let image: UIImage
+
+    var body: some View {
+        Image(uiImage: image)
+            .resizable()
+            .clipShape(Circle())
+            .frame(width: 150, height: 150)
+            .overlay(
+                Circle()
+                    .stroke(Color.black, lineWidth: 2)
+            )
+            .padding(.vertical, 20)
+    }
+}
+
+struct Header: View {
+    // Again, simple stored properties, passed down from another view
+    let image: UIImage
+    let name: String
+    let nickName: String
+
+    var body: some View {
+        VStack {
+            RoundImage(image: image)
+            Text(name)
+                .font(.title)
+                .bold()
+            Text(nickName)
+                .foregroundColor(.secondary)
+        }
+        .padding(.bottom, 20)
+    }
+}
+
+struct Row: View {
+    // And one more time, all simple stored properties, passed down from another view
+    let label: String
+    let text: String
+    let destination: URL
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(label)
+                .font(.footnote)
+                .bold()
+            Link(text, destination: destination)
+                .buttonStyle(BorderlessButtonStyle())
+        }
+        .padding(.top, 8)
+    }
 }
 
 struct ContentView: View {
     @State private var contact = TestData.contact
 
     var body: some View {
-        Image(systemName: contact.photoName)
+        VStack(alignment: .leading) {
+            Header(
+                image: contact.photo,
+                name: contact.fullName,
+                nickName: contact.nickName
+            )
+            Row(
+                label: "Email",
+                text: contact.email,
+                destination: URL(string: "mailto:\(contact.email)")!
+            )
+            Row(
+                label: "Phone",
+                text: contact.phone,
+                destination: URL(string: "tel:\(contact.phone)")!
+            )
+        }
     }
 }
 
