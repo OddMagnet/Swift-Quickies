@@ -96,8 +96,12 @@ struct Row: View {
     }
 }
 
+// MARK: - Local State, Local Value, @State
 struct DetailView: View {
     let contact = TestData.contact
+
+    // A simple local source of truth for temporary data, used to display the EditContactView
+    @State private var isSheetPresented = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -116,26 +120,59 @@ struct DetailView: View {
                 text: contact.phone,
                 destination: URL(string: "tel:\(contact.phone)")!
             )
+            Button("Edit", action: { isSheetPresented = true })
+                .padding(.top, 8)
+        }
+        .fullScreenCover(isPresented: $isSheetPresented) {
+            EditContactView()
         }
     }
 }
 
-// MARK: - Local State, Local Value, @State
 struct EditContactView: View {
-    // A simple local source of truth for temporary data, editable for the user
+    // Another simple local source of truth for temporary data, editable for the user
     @State private var draft = TestData.contact
+
+    @Environment(\.presentationMode) private var presentationMode
 
     var body: some View {
         VStack {
             RoundImage(image: draft.photo)
+                .padding(.bottom, 20)
+            VStack {
+                EditableRow(title: "Name", text: $draft.fullName)
+                EditableRow(title: "Nickname", text: $draft.nickName)
+                EditableRow(title: "E-Mail", text: $draft.email)
+                EditableRow(title: "Phone", text: $draft.phone)
+                Spacer()
+                Button("Dismiss", action: { self.presentationMode.wrappedValue.dismiss() })
+                    .padding(.bottom, 20)
+            }
+            .padding(.leading, 100)
         }
+    }
+}
+
+// MARK: - Shared State, Shared Value, @Binding
+struct EditableRow: View {
+    let title: String
+    // A shared, editable value, passed down from an ancestor view
+    @Binding var text: String
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(title)
+                .font(.footnote)
+                .bold()
+            TextField("", text: $text)
+        }
+        .padding(.top, 8)
     }
 }
 
 struct ContentView: View {
     var body: some View {
-            DetailView()
-//            EditContactView()
+        DetailView()
     }
 }
 
