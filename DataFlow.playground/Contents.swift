@@ -97,7 +97,7 @@ struct Row: View {
 }
 
 struct DetailView: View {
-    @State private var contact = TestData.contact
+    let contact = TestData.contact
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -120,9 +120,22 @@ struct DetailView: View {
     }
 }
 
+// MARK: - Local State, Local Value, @State
+struct EditContactView: View {
+    // A simple local source of truth for temporary data, editable for the user
+    @State private var draft = TestData.contact
+
+    var body: some View {
+        VStack {
+            RoundImage(image: draft.photo)
+        }
+    }
+}
+
 struct ContentView: View {
     var body: some View {
-        DetailView()
+            DetailView()
+//            EditContactView()
     }
 }
 
