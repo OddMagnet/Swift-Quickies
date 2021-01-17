@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct DataFlowApp: App {
+    @StateObject private var dataController = DataController()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DetailView(dataController: dataController)
         }
     }
 }

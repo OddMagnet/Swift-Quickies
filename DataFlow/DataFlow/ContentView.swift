@@ -21,7 +21,7 @@ import SwiftUI
             - Regular Property, if the data won't change
             - @Binding, if the data needs to be editable
         - *Shared Object*: e.g. model type with reference semantics, like Core Data's managed objects
-            - @ObservedObject, editable
+            - @ObservedObject, editable, equivalent to @Binding, but for Objects
     - ** Global State**: When the data is not owned by any particular view and lives as long as the app lives
         - *Global Value*: e.g. settings, dark mode, accent color
             - @Environment, not editable
@@ -34,37 +34,40 @@ import SwiftUI
 //
 //
 // MARK: - Local State
-struct DetailView: View {
+struct LocalOnlyDetailView: View {
     // Local Value, Constant
     let contact = TestData.contact
     // Local Value, @State
     @State private var isEditContactViewPresented = false
 
     var body: some View {
-        List {
-            Header(
-                image: contact.photo,
-                name: contact.fullName,
-                nickName: contact.nickName
-            )
-            .frame(maxWidth: .infinity)
-            Row(
-                label: "E-Mail",
-                text: contact.email,
-                destination: URL(string: "mailto:\(contact.email)")!
-            )
-            Row(
-                label: "Phone",
-                text: contact.phone,
-                destination: URL(string: "tel:\(contact.phone)")!
-            )
-        }
-        .listStyle(PlainListStyle())
-        .toolbar {
-            Button("Edit", action: { isEditContactViewPresented = true} )
-        }
-        .popover(isPresented: $isEditContactViewPresented) {
-            EditContactView()
+        NavigationView {
+            List {
+                Header(
+                    image: contact.photo,
+                    name: contact.fullName,
+                    nickName: contact.nickName
+                )
+                .frame(maxWidth: .infinity)
+                Row(
+                    label: "E-Mail",
+                    text: contact.email,
+                    destination: URL(string: "mailto:\(contact.email)")!
+                )
+                Row(
+                    label: "Phone",
+                    text: contact.phone,
+                    destination: URL(string: "tel:\(contact.phone)")!
+                )
+            }
+            .listStyle(PlainListStyle())
+            .toolbar {
+                Button("Edit", action: { isEditContactViewPresented = true} )
+            }
+            .popover(isPresented: $isEditContactViewPresented) {
+                EditContactView()
+            }
+            .navigationTitle("DataFlow Examples")
         }
     }
 }
@@ -161,22 +164,56 @@ struct EditableRow: View {
     }
 }
 
+class DataController: ObservableObject {
+    // Shared Object, useable in other Views via the @StateObject or @ObservedObject wrappers
+    // in `DataFlowApp.swift` a dataController variable is created with @StateObject
+    // and then shared to decendant views via @ObservedObject
+    @Published var contact = TestData.contact
+}
 
-//
-//
-// MARK: - ContentView
+struct DetailView: View {
+    // Shared Object with the @ObservedObject wrapper, passed from `DataFlowApp.swift`
+    @ObservedObject var dataController: DataController
+    @State private var isEditContactViewPresented = false
 
-struct ContentView: View {
+    // computed property for easier access
+    var contact: Contact { dataController.contact }
+
     var body: some View {
         NavigationView {
-            DetailView()
-                .navigationTitle("DataFlow Example")
+            List {
+                Header(
+                    image: contact.photo,
+                    name: contact.fullName,
+                    nickName: contact.nickName
+                )
+                .frame(maxWidth: .infinity)
+                Row(
+                    label: "E-Mail",
+                    text: contact.email,
+                    destination: URL(string: "mailto:\(contact.email)")!
+                )
+                Row(
+                    label: "Phone",
+                    text: contact.phone,
+                    destination: URL(string: "tel:\(contact.phone)")!
+                )
+            }
+            .listStyle(PlainListStyle())
+            .toolbar {
+                Button("Edit", action: { isEditContactViewPresented = true} )
+            }
+            .popover(isPresented: $isEditContactViewPresented) {
+                EditContactView()
+            }
+            .navigationTitle("DataFlow Examples")
         }
     }
 }
 
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        DetailView(dataController: DataController())
     }
 }
