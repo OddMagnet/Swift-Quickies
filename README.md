@@ -14,4 +14,4 @@ To see how an ordered set combined the best of both arrays (fast random access a
 without the downsides of either of them (checking for specific items runs in linear time - O(n) - for arrays and sets loosing their order)
 
 ## DataFlow
-To explore the different types of data flow in SwiftUI
+To explore the different types of data flow in SwiftUI and create something that I can read again to solidify the knowledge
