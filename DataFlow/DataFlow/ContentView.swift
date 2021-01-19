@@ -90,6 +90,21 @@ struct LocalStateEditContactView: View {
     }
 }
 
+/* DataFlowApp.swift has an example for the @StateObject wrapper
+@main
+struct DataFlowApp: App {
+    // Local Object, @StateObject, passed down the tree
+    @StateObject private var dataController = DataController()
+
+    var body: some Scene {
+        WindowGroup {
+            DetailView()
+                .environmentObject(dataController)
+        }
+    }
+}
+*/
+
 //
 //
 // MARK: - Shared State
