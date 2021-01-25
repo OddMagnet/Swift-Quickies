@@ -15,3 +15,6 @@ without the downsides of either of them (checking for specific items runs in lin
 
 ## DataFlow
 To explore the different types of data flow in SwiftUI and create something that I can read again to solidify the knowledge
+
+## Spaceship Operator
+As seen in other languages like C++ and Ruby, just for fun
