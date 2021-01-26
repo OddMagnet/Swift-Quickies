@@ -18,3 +18,6 @@ To explore the different types of data flow in SwiftUI and create something that
 
 ## Spaceship Operator
 As seen in other languages like C++ and Ruby, just for fun
+
+## PersonNameComponentsFormatter
+Exploring the formatter for names that Apple provides
