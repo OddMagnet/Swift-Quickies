@@ -10,11 +10,24 @@ import SwiftUI
 struct LockscreenButton: View {
     @State private var pressed = false
     @State private var activated = false
-    let image: String
     let generator = UIImpactFeedbackGenerator()
 
+    let imageActive: String
+    let imageInactive: String
+    let action: () -> Void
+
+    init(image: String, action: @escaping () -> Void) {
+        self.init(active: image, inactive: image, action: action)
+    }
+
+    init(active imageActive: String, inactive imageInactive: String, action: @escaping () -> Void) {
+        self.imageInactive = imageInactive
+        self.imageActive = imageActive
+        self.action = action
+    }
+
     var body: some View {
-        Image(systemName: image)
+        Image(systemName: activated ? imageActive : imageInactive)
             // Color changes based on activation state
             .foregroundColor(
                 activated
@@ -53,6 +66,6 @@ struct LockscreenButton: View {
 
 struct LockscreenButton_Previews: PreviewProvider {
     static var previews: some View {
-        LockscreenButton(image: "camera.fill")
+        LockscreenButton(image: "camera.fill", action: { print("Some action") })
     }
 }

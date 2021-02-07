@@ -37,9 +37,18 @@ struct ContentView: View {
                     Spacer()
 
                     HStack {
-                        LockscreenButton(image: "flashlight.off.fill")
+                        LockscreenButton(
+                            active: "flashlight.on.fill",
+                            inactive: "flashlight.off.fill",
+                            action: { print("Toggling flashlight") }
+                        )
+
                         Spacer()
-                        LockscreenButton(image: "camera.fill")
+
+                        LockscreenButton(
+                            image: "camera.fill",
+                            action: { print("Starting camera") }
+                        )
                     }
                     .padding(.horizontal, 50)
                     .padding(.vertical, 25)
