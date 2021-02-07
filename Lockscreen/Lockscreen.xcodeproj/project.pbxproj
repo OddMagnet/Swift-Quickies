@@ -11,6 +11,7 @@
 		4C4A222F25D0479D001E6BCA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A222E25D0479D001E6BCA /* ContentView.swift */; };
 		4C4A223125D0479F001E6BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C4A223025D0479F001E6BCA /* Assets.xcassets */; };
 		4C4A223425D0479F001E6BCA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C4A223325D0479F001E6BCA /* Preview Assets.xcassets */; };
+		4C4A223D25D04C9B001E6BCA /* LockscreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A223C25D04C9B001E6BCA /* LockscreenButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		4C4A223025D0479F001E6BCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C4A223325D0479F001E6BCA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4C4A223525D0479F001E6BCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C4A223C25D04C9B001E6BCA /* LockscreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockscreenButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				4C4A222C25D0479D001E6BCA /* LockscreenApp.swift */,
 				4C4A222E25D0479D001E6BCA /* ContentView.swift */,
+				4C4A223C25D04C9B001E6BCA /* LockscreenButton.swift */,
 				4C4A223025D0479F001E6BCA /* Assets.xcassets */,
 				4C4A223525D0479F001E6BCA /* Info.plist */,
 				4C4A223225D0479F001E6BCA /* Preview Content */,
@@ -140,6 +143,7 @@
 			files = (
 				4C4A222F25D0479D001E6BCA /* ContentView.swift in Sources */,
 				4C4A222D25D0479D001E6BCA /* LockscreenApp.swift in Sources */,
+				4C4A223D25D04C9B001E6BCA /* LockscreenButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

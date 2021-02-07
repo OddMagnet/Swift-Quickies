@@ -37,8 +37,12 @@ struct ContentView: View {
                     Spacer()
 
                     HStack {
+                        LockscreenButton(image: "flashlight.off.fill")
                         Spacer()
+                        LockscreenButton(image: "camera.fill")
                     }
+                    .padding(.horizontal, 50)
+                    .padding(.vertical, 25)
 
                     Capsule()
                         .fill(Color.white)
