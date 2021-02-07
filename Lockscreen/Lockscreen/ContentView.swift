@@ -31,6 +31,8 @@ struct ContentView: View {
 
                     Text(Date(), style: .date)
                         .font(.title2)
+                        .offset(y: -10)
+//                        .padding(.top, -10)   using `offset` over padding since it does not affect view below
 
                     Spacer()
 
