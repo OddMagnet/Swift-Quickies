@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var locked = true
+
     var body: some View {
         ZStack {
             GeometryReader { geo in
@@ -21,13 +23,16 @@ struct ContentView: View {
 
                 // MARK: - Content
                 VStack(spacing: 0) {
-                    Image(systemName: "lock.fill")
+                    Image(systemName: locked ? "lock.fill" : "lock.open.fill")
                         .font(.largeTitle)
                         .padding(.top, 60)
+                        .onTapGesture {
+                            locked.toggle()
+                        }
 
                     // using the new `style` parameter from iOS 14
                     Text(Date(), style: .time)
-                        .font(.system(size: 92, weight: .thin))
+                        .font(.system(size: 90, weight: .thin))
 
                     Text(Date(), style: .date)
                         .font(.title2)
