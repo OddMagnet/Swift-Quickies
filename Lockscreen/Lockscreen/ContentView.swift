@@ -25,10 +25,11 @@ struct ContentView: View {
                         .font(.largeTitle)
                         .padding(.top, 60)
 
-                    Text("9:41")
+                    // using the new `style` parameter from iOS 14
+                    Text(Date(), style: .time)
                         .font(.system(size: 92, weight: .thin))
 
-                    Text("February 7, 2021")
+                    Text(Date(), style: .date)
                         .font(.title2)
 
                     Spacer()
@@ -51,5 +52,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environment(\.locale, .init(identifier: "de"))
     }
 }
