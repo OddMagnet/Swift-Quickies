@@ -12,8 +12,11 @@ struct ContentView: View {
         NavigationView {
             ListingView()
                 .navigationTitle("Collections")
-                .onAppear { // Fix the very slight color difference for the Header in the ListingView
+                .onAppear {
+                    // Fix the very slight color difference for the Header in the ListingView
                     UITableView.appearance().backgroundColor = UIColor(named: "Background")
+                    // Fix the page dots in a TabView being too bright in light mode by using the standard label color
+                    UIPageControl.appearance().currentPageIndicatorTintColor = .label
                 }
         }
     }

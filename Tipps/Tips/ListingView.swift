@@ -18,7 +18,7 @@ struct ListingView: View {
          */
         List {
             Section(header:
-                NavigationLink(destination: Text("Detail View")) {
+                NavigationLink(destination: DetailView()) {
                     ZStack(alignment: .topLeading) {
                         Image("iOS14")
                             .renderingMode(.original)
@@ -42,7 +42,7 @@ struct ListingView: View {
                 }
             ) {
                 ForEach(0 ..< 30) { row in
-                    NavigationLink(destination: Text("Detail View")) {
+                    NavigationLink(destination: DetailView()) {
                         ListingRow()
                     }
                     .listRowBackground(Color("Background"))
@@ -55,6 +55,12 @@ struct ListingView: View {
 
 struct ListingView_Previews: PreviewProvider {
     static var previews: some View {
-        ListingView()
+        NavigationView {
+            ListingView()
+                .navigationTitle("Collections")
+                .onAppear { // Fix the very slight color difference for the Header in the ListingView
+                    UITableView.appearance().backgroundColor = UIColor(named: "Background")
+                }
+        }
     }
 }
