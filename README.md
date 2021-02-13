@@ -24,3 +24,6 @@ Exploring the formatter for names that Apple provides
 
 ## Lockscreen?
 Simply to practice building UIs based on a reference
+
+## Tipps?
+Same as Lockscreen
