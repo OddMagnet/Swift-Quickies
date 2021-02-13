@@ -12,6 +12,9 @@ struct ContentView: View {
         NavigationView {
             ListingView()
                 .navigationTitle("Collections")
+                .onAppear { // Fix the very slight color difference for the Header in the ListingView
+                    UITableView.appearance().backgroundColor = UIColor(named: "Background")
+                }
         }
     }
 }
