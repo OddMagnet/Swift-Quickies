@@ -1,6 +1,6 @@
 //
-//  TippsApp.swift
-//  Tipps
+//  TipsApp.swift
+//  Tips
 //
 //  Created by Michael Brünen on 13.02.21.
 //
