@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4CB8706C25D82530003606C8 /* TippsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB8706B25D82530003606C8 /* TippsApp.swift */; };
+		4CB8706C25D82530003606C8 /* TipsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB8706B25D82530003606C8 /* TipsApp.swift */; };
 		4CB8706E25D82530003606C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB8706D25D82530003606C8 /* ContentView.swift */; };
 		4CB8707025D82533003606C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CB8706F25D82533003606C8 /* Assets.xcassets */; };
 		4CB8707325D82533003606C8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CB8707225D82533003606C8 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4CB8706825D82530003606C8 /* Tipps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tipps.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4CB8706B25D82530003606C8 /* TippsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TippsApp.swift; sourceTree = "<group>"; };
+		4CB8706825D82530003606C8 /* Tips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tips.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CB8706B25D82530003606C8 /* TipsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsApp.swift; sourceTree = "<group>"; };
 		4CB8706D25D82530003606C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4CB8706F25D82533003606C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CB8707225D82533003606C8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -36,7 +36,7 @@
 		4CB8705F25D82530003606C8 = {
 			isa = PBXGroup;
 			children = (
-				4CB8706A25D82530003606C8 /* Tipps */,
+				4CB8706A25D82530003606C8 /* Tips */,
 				4CB8706925D82530003606C8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,21 +44,21 @@
 		4CB8706925D82530003606C8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4CB8706825D82530003606C8 /* Tipps.app */,
+				4CB8706825D82530003606C8 /* Tips.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4CB8706A25D82530003606C8 /* Tipps */ = {
+		4CB8706A25D82530003606C8 /* Tips */ = {
 			isa = PBXGroup;
 			children = (
-				4CB8706B25D82530003606C8 /* TippsApp.swift */,
+				4CB8706B25D82530003606C8 /* TipsApp.swift */,
 				4CB8706D25D82530003606C8 /* ContentView.swift */,
 				4CB8706F25D82533003606C8 /* Assets.xcassets */,
 				4CB8707425D82533003606C8 /* Info.plist */,
 				4CB8707125D82533003606C8 /* Preview Content */,
 			);
-			path = Tipps;
+			path = Tips;
 			sourceTree = "<group>";
 		};
 		4CB8707125D82533003606C8 /* Preview Content */ = {
@@ -72,9 +72,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4CB8706725D82530003606C8 /* Tipps */ = {
+		4CB8706725D82530003606C8 /* Tips */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4CB8707725D82533003606C8 /* Build configuration list for PBXNativeTarget "Tipps" */;
+			buildConfigurationList = 4CB8707725D82533003606C8 /* Build configuration list for PBXNativeTarget "Tips" */;
 			buildPhases = (
 				4CB8706425D82530003606C8 /* Sources */,
 				4CB8706525D82530003606C8 /* Frameworks */,
@@ -84,9 +84,9 @@
 			);
 			dependencies = (
 			);
-			name = Tipps;
+			name = Tips;
 			productName = Tipps;
-			productReference = 4CB8706825D82530003606C8 /* Tipps.app */;
+			productReference = 4CB8706825D82530003606C8 /* Tips.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -103,7 +103,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4CB8706325D82530003606C8 /* Build configuration list for PBXProject "Tipps" */;
+			buildConfigurationList = 4CB8706325D82530003606C8 /* Build configuration list for PBXProject "Tips" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -116,7 +116,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4CB8706725D82530003606C8 /* Tipps */,
+				4CB8706725D82530003606C8 /* Tips */,
 			);
 		};
 /* End PBXProject section */
@@ -139,7 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CB8706E25D82530003606C8 /* ContentView.swift in Sources */,
-				4CB8706C25D82530003606C8 /* TippsApp.swift in Sources */,
+				4CB8706C25D82530003606C8 /* TipsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +277,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.oddmagnet.Tipps;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.oddmagnet.Tips;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -299,7 +299,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.oddmagnet.Tipps;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.oddmagnet.Tips;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -309,7 +309,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4CB8706325D82530003606C8 /* Build configuration list for PBXProject "Tipps" */ = {
+		4CB8706325D82530003606C8 /* Build configuration list for PBXProject "Tips" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4CB8707525D82533003606C8 /* Debug */,
@@ -318,7 +318,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4CB8707725D82533003606C8 /* Build configuration list for PBXNativeTarget "Tipps" */ = {
+		4CB8707725D82533003606C8 /* Build configuration list for PBXNativeTarget "Tips" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4CB8707825D82533003606C8 /* Debug */,
