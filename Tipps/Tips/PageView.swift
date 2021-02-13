@@ -14,24 +14,28 @@ struct PageView: View {
     )
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                Image("Example")
-                    .resizable()
-                    .scaledToFit()
+        // Using GeometryReader to add a parallax effect
+        GeometryReader { geo in
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Image("Example")
+                        .resizable()
+                        .scaledToFit()
 
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Pre-heading here")
-                        .font(.subheadline)
-                        .textCase(.uppercase)
-                        .foregroundColor(.secondary)
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Pre-heading here")
+                            .font(.subheadline)
+                            .textCase(.uppercase)
+                            .foregroundColor(.secondary)
 
-                    Text("Heading here")
-                        .font(.title)
+                        Text("Heading here")
+                            .font(.title)
 
-                    Text(demoText)
+                        Text(demoText)
+                    }
+                    .padding([.top, .horizontal])
+                    .offset(x: geo.frame(in: .global).minX / 5)
                 }
-                .padding([.top, .horizontal])
             }
         }
     }
