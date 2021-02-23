@@ -27,3 +27,6 @@ Simply to practice building UIs based on a reference
 
 ## Tipps?
 Same as Lockscreen
+
+## Boxing
+To experiment witht the concept of boxing by building a very simple box, adding back some lost as well as new functionality and mapping
