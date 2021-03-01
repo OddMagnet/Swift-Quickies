@@ -30,3 +30,7 @@ Same as Lockscreen
 
 ## Boxing
 To experiment witht the concept of boxing by building a very simple box, adding back some lost as well as new functionality and mapping
+
+## Custom Property Wrapper
+To learn how to create a property wrapper that also update the `body` property, just like `@State`
+
