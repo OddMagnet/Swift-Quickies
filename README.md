@@ -34,3 +34,5 @@ To experiment witht the concept of boxing by building a very simple box, adding 
 ## Custom Property Wrapper
 To learn how to create a property wrapper that also update the `body` property, just like `@State`
 
+## Assertions
+To better understand the intricacies of assertions
