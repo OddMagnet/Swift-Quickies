@@ -13,8 +13,13 @@ struct SortedArray<Element>: CustomStringConvertible, RandomAccessCollection whe
     }
 
     mutating func insert(_ element: Element) {
+        for (i, item) in items.enumerated() {
+            if item >= element {
+                items.insert(element, at: i)
+                return
+            }
+        }
         items.append(element)
-        items.sort()
     }
 
     mutating func remove(at index: Int) {
