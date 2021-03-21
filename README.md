@@ -36,3 +36,6 @@ To learn how to create a property wrapper that also update the `body` property, 
 
 ## Assertions
 To better understand the intricacies of assertions
+
+## Sorted Arrays
+Implementing a basic sorted array, then improving on it
