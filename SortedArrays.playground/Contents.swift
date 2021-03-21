@@ -18,13 +18,27 @@ struct SortedArray<Element>: CustomStringConvertible, RandomAccessCollection {
     }
 
     mutating func insert(_ element: Element) {
-        for (i, item) in items.enumerated() {
-            if sortBefore(element, item) {
-                items.insert(element, at: i)
-                return
+        // Set initial bounds
+        var lowerBound = 0
+        var upperBound = items.count
+        var middleIndex = lowerBound + (upperBound - lowerBound) / 2
+
+        while lowerBound < upperBound {
+            // check if the new element belongs in the lower half
+            if sortBefore(element, items[middleIndex]) {
+                // if so, set the new upperBound
+                upperBound = middleIndex
+            // otherwise it belongs in the upper half
+            } else {
+                // so set the new lowerBound
+                lowerBound = middleIndex + 1
             }
+            // finally calculate the new middleIndex
+            middleIndex = lowerBound + (upperBound - lowerBound) / 2
+            // as soon as the lower and upperBound are the same the index is found and the while loop end
         }
-        items.append(element)
+        // and the new element is inserted
+        items.insert(element, at: middleIndex)
     }
 
     mutating func remove(at index: Int) {
@@ -57,7 +71,7 @@ extension SortedArray where Element: Comparable {
 }
 
 var array = SortedArray<Int>()
-array.insert(3)
-array.insert(1)
-array.insert(2)
+for _ in 1...20 {
+    array.insert(Int.random(in: 1...200))
+}
 print(array)
