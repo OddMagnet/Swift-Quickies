@@ -31,6 +31,10 @@ struct SortedArray<Element>: CustomStringConvertible, RandomAccessCollection {
         items.remove(at: index)
     }
 
+    mutating func sorted() -> [Element] {
+        return items
+    }
+
     // NOTE: - the `warn_unqualified_access` is used so Swift gives a warning when the normal min()/max() functions are used
     // instead of the optimised versions, which are called via self.min() and self.max()
     /// Optimised min() version, returns the first element of the sorted array
@@ -52,3 +56,8 @@ extension SortedArray where Element: Comparable {
     }
 }
 
+var array = SortedArray<Int>()
+array.insert(3)
+array.insert(1)
+array.insert(2)
+print(array)
