@@ -39,3 +39,6 @@ To better understand the intricacies of assertions
 
 ## Sorted Arrays
 Implementing a basic sorted array, then improving on it
+
+## ShittyJSON
+A macOS command line app to explore ways to handle messy or unknown JSON in an elegant way
