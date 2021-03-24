@@ -36,29 +36,55 @@ let json = """
     }
 ]
 """
-extension Dictionary where Key == String {
-    func bool(for key: String) -> Bool? {
-        self[key] as? Bool
+
+struct JSON: RandomAccessCollection {
+    var value: Any?
+    var startIndex: Int { array.startIndex }
+    var endIndex: Int { array.endIndex }
+
+    init(string: String) throws {
+        let data = Data(string.utf8)
+        value = try JSONSerialization.jsonObject(with: data)
     }
 
-    func string(for key: String) -> String? {
-        self[key] as? String
+    init(value: Any?) {
+        self.value = value
     }
 
-    func int(for key: String) -> Int? {
-        self[key] as? Int
+    // MARK: - Value accessors
+    // Optional and non-optional, so the programmer can decide which one to use
+    var optionalBool: Bool? { value as? Bool }
+    var optionalDouble: Double? { value as? Double }
+    var optionalInt: Int? { value as? Int }
+    var optionalString: String? { value as? String }
+    var optionalArray: [JSON]? {
+        // return Arrays of the JSON type, so it's content can be accessed just as easily as top-level content
+        let converted = value as? [Any]
+        return converted?.map { JSON(value: $0) }
+    }
+    var optionalDictionary: [String: JSON]? {
+        // same trick as for optional arrays
+        let converted = value as? [String: Any]
+        return converted?.mapValues { JSON(value: $0) }
     }
 
-    func double(for key: String) -> Double? {
-        self[key] as? Double
-    }
+    var bool: Bool { optionalBool ?? false }
+    var double: Double { optionalDouble ?? 0.0 }
+    var int: Int { optionalInt ?? 0 }
+    var string: String { optionalString ?? "" }
+    var array: [JSON] { optionalArray ?? [] }
+    var dictionary: [String: JSON] { optionalDictionary ?? [:] }
+
+    // MARK: - Query accessors
+    subscript(index: Int) -> JSON { optionalArray?[index] ?? JSON(value: nil) }
+    subscript(key: String) -> JSON { optionalDictionary?[key] ?? JSON(value: nil) }
 }
 
-let data = Data(json.utf8)
-if let objects = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] {
-    for object in objects {
-        if let title = object.string(for: "title") {
-            print(title)
-        }
+let object = try JSON(string: json)
+for item in object {
+    print(item["title"].string)
+    print(item["address"]["city"].string)
+    if let latitude = item["address"]["gps"]["lat"].optionalDouble {
+        print("Latitude is \(latitude)")
     }
 }
