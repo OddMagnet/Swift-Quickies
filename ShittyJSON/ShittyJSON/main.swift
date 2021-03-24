@@ -37,6 +37,7 @@ let json = """
 ]
 """
 
+@dynamicMemberLookup
 struct JSON: RandomAccessCollection {
     var value: Any?
     var startIndex: Int { array.startIndex }
@@ -77,14 +78,14 @@ struct JSON: RandomAccessCollection {
 
     // MARK: - Query accessors
     subscript(index: Int) -> JSON { optionalArray?[index] ?? JSON(value: nil) }
-    subscript(key: String) -> JSON { optionalDictionary?[key] ?? JSON(value: nil) }
+    subscript(dynamicMember key: String) -> JSON { optionalDictionary?[key] ?? JSON(value: nil) }
 }
 
 let object = try JSON(string: json)
 for item in object {
-    print(item["title"].string)
-    print(item["address"]["city"].string)
-    if let latitude = item["address"]["gps"]["lat"].optionalDouble {
+    print(item.title.string)
+    print(item.address.city.string)
+    if let latitude = item.address.gps.lat.optionalDouble {
         print("Latitude is \(latitude)")
     }
 }
