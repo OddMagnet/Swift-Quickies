@@ -58,6 +58,7 @@ struct JSON: RandomAccessCollection {
     var optionalDouble: Double? { value as? Double }
     var optionalInt: Int? { value as? Int }
     var optionalString: String? { value as? String }
+    var optionalDate: Date? { value as? Date }
     var optionalArray: [JSON]? {
         // return Arrays of the JSON type, so it's content can be accessed just as easily as top-level content
         let converted = value as? [Any]
@@ -73,6 +74,7 @@ struct JSON: RandomAccessCollection {
     var double: Double { optionalDouble ?? 0.0 }
     var int: Int { optionalInt ?? 0 }
     var string: String { optionalString ?? "" }
+    var data: Date { optionalDate ?? Date() }
     var array: [JSON] { optionalArray ?? [] }
     var dictionary: [String: JSON] { optionalDictionary ?? [:] }
 
