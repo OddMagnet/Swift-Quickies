@@ -19,6 +19,11 @@ struct Node<Value> {
     }
 }
 
+// Ability to compare nodes and make them hashable & codable
+extension Node: Equatable where Value: Equatable {}
+extension Node: Hashable where Value: Hashable {}
+extension Node: Codable where Value: Codable {}
+
 var michael = Node("Michael")
 
 var martin = Node("Martin")
