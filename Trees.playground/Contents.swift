@@ -1,5 +1,12 @@
 import Cocoa
 
+@_functionBuilder
+struct NodeBuilder {
+    static func buildBlock<Value>(_ children: Node<Value>...) -> [Node<Value>] {
+        children
+    }
+}
+
 struct Node<Value> {
     var value: Value
     private(set) var children: [Node]
@@ -16,6 +23,11 @@ struct Node<Value> {
     init(_ value: Value, children: [Node]) {
         self.value = value
         self.children = children
+    }
+
+    init(_ value: Value, @NodeBuilder builder: () -> [Node]) {
+        self.value = value
+        self.children = builder()
     }
 
     mutating func add(child: Node) {
@@ -41,17 +53,13 @@ extension Node where Value: Equatable {
     }
 }
 
-var michael = Node("Michael")
-
-var martin = Node("Martin")
-let aliya = Node("Aliya")
-let daimon = Node("Daimon")
-martin.add(child: aliya)
-martin.add(child: daimon)
-
-var root = Node("Reinhard")
-root.add(child: michael)
-root.add(child: martin)
+let root = Node("Reinhard") {
+    Node("Michael")
+    Node("Martin") {
+        Node("Aliya")
+        Node("Daimon")
+    }
+}
 
 print(root)
 if let brother = root.find("Martin") {
