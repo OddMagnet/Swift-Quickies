@@ -28,6 +28,19 @@ extension Node: Equatable where Value: Equatable {}
 extension Node: Hashable where Value: Hashable {}
 extension Node: Codable where Value: Codable {}
 
+// Add ability to search for a specific node in the tree
+extension Node where Value: Equatable {
+    func find(_ value: Value) -> Node? {
+        if self.value == value { return self }
+
+        for child in children {
+            if let match = child.find(value) { return match }
+        }
+
+        return nil
+    }
+}
+
 var michael = Node("Michael")
 
 var martin = Node("Martin")
@@ -41,4 +54,6 @@ root.add(child: michael)
 root.add(child: martin)
 
 print(root)
-print(root.count)
+if let brother = root.find("Martin") {
+    print(brother.count)
+}
