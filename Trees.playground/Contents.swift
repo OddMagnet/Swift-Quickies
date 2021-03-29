@@ -1,6 +1,6 @@
 import Cocoa
 
-final class Node<Value> {
+struct Node<Value> {
     var value: Value
     private(set) var children: [Node]
 
@@ -18,23 +18,14 @@ final class Node<Value> {
         self.children = children
     }
 
-    func add(child: Node) {
+    mutating func add(child: Node) {
         children.append(child)
     }
 }
 
 // Ability to compare nodes and make them hashable & codable
-extension Node: Equatable where Value: Equatable {
-    static func ==(lhs: Node, rhs: Node) -> Bool {
-        lhs.value == rhs.value && lhs.children == rhs.children
-    }
-}
-extension Node: Hashable where Value: Hashable {
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(value)
-        hasher.combine(children)
-    }
-}
+extension Node: Equatable where Value: Equatable {}
+extension Node: Hashable where Value: Hashable {}
 extension Node: Codable where Value: Codable {}
 
 // Add ability to search for a specific node in the tree
