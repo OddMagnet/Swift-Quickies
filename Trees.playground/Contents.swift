@@ -4,6 +4,10 @@ struct Node<Value> {
     var value: Value
     private(set) var children: [Node]
 
+    var count: Int {
+        1 + children.reduce(0) { $0 + $1.count }
+    }
+
     init(_ value: Value) {
         self.value = value
         children = []
@@ -37,3 +41,4 @@ root.add(child: michael)
 root.add(child: martin)
 
 print(root)
+print(root.count)
