@@ -120,13 +120,9 @@ extension Array {
 
 extension BSTNode where Value: Equatable {
     func find(_ search: Value) -> BSTNode? {
-        for node in self {
-            if node.value == search {
-                return node
-            }
-        }
-
-        return nil
+        if value == search { return self }              // if the search value equals the current one, return self
+        if search < value { return left?.find(search) } // if the search value is less, then the search continues on the left side
+        else { return right?.find(search) }             // otherwise, if the search value is more, then the search continues on the right
     }
 }
 
@@ -144,3 +140,16 @@ print("Binary Tree Testing Output")
 for node in bRoot {
     print(node.value, terminator: " -> ")
 }
+print("end")
+
+print("Creating big BSTree to test search function")
+let testRoot = BSTNode(500_000)
+for _ in 1...1_000_000 {
+    testRoot.insert(Int.random(in: 1...1_000_000))
+}
+let searchValue = Int.random(in: 1...1_000_000)
+print("Searching for \(searchValue)")
+var start = CFAbsoluteTimeGetCurrent()
+let result = testRoot.find(searchValue)
+var end = CFAbsoluteTimeGetCurrent()
+print("Took \(String(format: "%f", end - start)) seconds to fast find \(result?.value ?? -1)")
