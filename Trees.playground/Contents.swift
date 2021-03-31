@@ -71,27 +71,40 @@ print("")
 
 
 
-// MARK: - Binary tree
-class BinaryNode<Value> {
+// MARK: - Binary Search Tree
+class BSTNode<Value: Comparable> {
     var value: Value
-    var left: BinaryNode?
-    var right: BinaryNode?
+    var count: Int = 1
+    private(set) var left: BSTNode?
+    private(set) var right: BSTNode?
 
     init(_ value: Value) {
         self.value = value
     }
+
+    func insert(_ newValue: Value) {
+        if newValue < value {                               // check left side
+            if left == nil { left = BSTNode(newValue) }     // create left node if it doesn't exist
+            else { left?.insert(newValue) }                 // if it does, try to insert from there
+        } else if newValue > value {                        // check right side
+            if right == nil { right = BSTNode(newValue) }   // create right node if it doesn't exist
+            else { right?.insert(newValue) }                // if it does, try to insert from there
+        } else {                                            // if the newValue is neither more or less
+            count += 1                                      // then increase the count
+        }
+    }
 }
 
-extension BinaryNode: Sequence {
-    func makeIterator() -> Array<BinaryNode<Value>>.Iterator {
+extension BSTNode: Sequence {
+    func makeIterator() -> Array<BSTNode<Value>>.Iterator {
         Array(self).makeIterator()
     }
 }
 
 extension Array {
     // Initialise an array from a binary tree in order (LPR)
-    init<T>(_ binaryNode: BinaryNode<T>) where Element == BinaryNode<T> {
-        self = [BinaryNode<T>]()
+    init<T>(_ binaryNode: BSTNode<T>) where Element == BSTNode<T> {
+        self = [BSTNode<T>]()
 
         if let left = binaryNode.left {
             self += Array(left)
@@ -105,8 +118,8 @@ extension Array {
     }
 }
 
-extension BinaryNode where Value: Equatable {
-    func find(_ search: Value) -> BinaryNode? {
+extension BSTNode where Value: Equatable {
+    func find(_ search: Value) -> BSTNode? {
         for node in self {
             if node.value == search {
                 return node
@@ -117,15 +130,15 @@ extension BinaryNode where Value: Equatable {
     }
 }
 
-let bRoot = BinaryNode(1)
-bRoot.left = BinaryNode(5)
-bRoot.right = BinaryNode(3)
+let bRoot = BSTNode(4)
+bRoot.insert(5)
+bRoot.insert(3)
 
-bRoot.left?.left = BinaryNode(7)
-bRoot.left?.right = BinaryNode(2)
+bRoot.insert(7)
+bRoot.insert(2)
 
-bRoot.right?.left = BinaryNode(6)
-bRoot.right?.right = BinaryNode(4)
+bRoot.insert(6)
+bRoot.insert(1)
 
 print("Binary Tree Testing Output")
 for node in bRoot {
