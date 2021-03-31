@@ -72,7 +72,7 @@ print("")
 
 
 // MARK: - Binary tree
-class BinaryNode<Value>: Sequence {
+class BinaryNode<Value> {
     var value: Value
     var left: BinaryNode?
     var right: BinaryNode?
@@ -80,8 +80,10 @@ class BinaryNode<Value>: Sequence {
     init(_ value: Value) {
         self.value = value
     }
+}
 
-    func makeIterator() -> Array<Node<Value>>.Iterator {
+extension BinaryNode: Sequence {
+    func makeIterator() -> Array<BinaryNode<Value>>.Iterator {
         Array(self).makeIterator()
     }
 }
@@ -103,6 +105,18 @@ extension Array {
     }
 }
 
+extension BinaryNode where Value: Equatable {
+    func find(_ search: Value) -> BinaryNode? {
+        for node in self {
+            if node.value == search {
+                return node
+            }
+        }
+
+        return nil
+    }
+}
+
 let bRoot = BinaryNode(1)
 bRoot.left = BinaryNode(5)
 bRoot.right = BinaryNode(3)
@@ -115,5 +129,5 @@ bRoot.right?.right = BinaryNode(4)
 
 print("Binary Tree Testing Output")
 for node in bRoot {
-    print(node.value)
+    print(node.value, terminator: " -> ")
 }
