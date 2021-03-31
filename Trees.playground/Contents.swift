@@ -93,6 +93,21 @@ class BSTNode<Value: Comparable> {
             count += 1                                      // then increase the count
         }
     }
+
+    func remove(_ node: BSTNode) {
+        if count > 1 {              // if the count is more than 1
+            count -= 1              // then only reduce the count
+        } else {                    // otherwise
+            if left != nil {        // check if a left node exists, if so
+                left!.count = 1     // reduce it's count to 1, then
+                remove(left!)       // call remove on it, thus destroying it as well
+            }
+            if right != nil {       // same as for left
+                right!.count = 1
+                remove(right!)
+            }
+        }
+    }
 }
 
 extension BSTNode: Sequence {
@@ -142,12 +157,12 @@ for node in bRoot {
 }
 print("end")
 
-print("Creating big BSTree to test search function")
-let testRoot = BSTNode(500_000)
-for _ in 1...1_000_000 {
-    testRoot.insert(Int.random(in: 1...1_000_000))
+print("Creating big BSTree to test search function (lower value in playgrounds)")
+let testRoot = BSTNode(25_000)
+for _ in 1...50_000 {
+    testRoot.insert(Int.random(in: 1...50_000))
 }
-let searchValue = Int.random(in: 1...1_000_000)
+let searchValue = Int.random(in: 1...50_000)
 print("Searching for \(searchValue)")
 var start = CFAbsoluteTimeGetCurrent()
 let result = testRoot.find(searchValue)
