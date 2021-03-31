@@ -117,18 +117,28 @@ extension BSTNode: Sequence {
 }
 
 extension Array {
+    enum BSTOrder {
+        case preOrder, postOrder, inOrder
+    }
     // Initialise an array from a binary tree in order (LPR)
-    init<T>(_ binaryNode: BSTNode<T>) where Element == BSTNode<T> {
+    init<T>(_ binaryNode: BSTNode<T>, order: BSTOrder = .inOrder) where Element == BSTNode<T> {
         self = [BSTNode<T>]()
 
-        if let left = binaryNode.left {
-            self += Array(left)
-        }
+        switch order {
+            case .inOrder:                                                  // LPR
+                if let left = binaryNode.left { self += Array(left) }       // Left
+                self += [binaryNode]                                        // Parent
+                if let right = binaryNode.right { self += Array(right) }    // Right
 
-        self += [binaryNode]
+            case .preOrder:                                                 // PLR
+                self += [binaryNode]                                        // Parent
+                if let left = binaryNode.left { self += Array(left) }       // Left
+                if let right = binaryNode.right { self += Array(right) }    // Right
 
-        if let right = binaryNode.right {
-            self += Array(right)
+            case .postOrder:                                                // LRP
+                if let left = binaryNode.left { self += Array(left) }       // Left
+                if let right = binaryNode.right { self += Array(right) }    // Right
+                self += [binaryNode]                                        // Parent
         }
     }
 }
