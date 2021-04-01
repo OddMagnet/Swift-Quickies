@@ -11,8 +11,8 @@ import SwiftUI
 class Square: Equatable {
     var row: Int            // the squares row
     var col: Int            // and column
-    var isWall = false
-    var moveCost = -1
+    var isWall = false      // if the square is a wall
+    var moveCost = -1       // cost to moving to this square, gets set by grid later
 
     init(row: Int, col: Int) {
         self.row = row
@@ -20,6 +20,7 @@ class Square: Equatable {
     }
 
     static func ==(lhs: Square, rhs: Square) -> Bool {
-        lhs.row == rhs.col && lhs.col == rhs.col
+        lhs.row == rhs.row && lhs.col == rhs.col
     }
 }
+
