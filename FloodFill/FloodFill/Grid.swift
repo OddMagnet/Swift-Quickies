@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 class Grid: ObservableObject {
     static let size = 20        // amount of rows and columns
@@ -18,6 +19,9 @@ class Grid: ObservableObject {
     var queuedSquares = [Square]()
     var checkedSquares = [Square]()
     var path = [Square]()
+
+    // Variable to help visualise the algorithm
+    var stepper: Cancellable?
 
     init() {
         var grid = [[Square]]()
@@ -118,6 +122,7 @@ class Grid: ObservableObject {
     // MARK: - Wall related functions
     /// Resets the walls on the map
     func resetWalls() {
+        stepper?.cancel()
         objectWillChange.send()
 
         for row in squares {
@@ -153,6 +158,7 @@ class Grid: ObservableObject {
     // MARK: - Route related functions
     /// Wipes the temporary arrays used for finding a route
     func clear() {
+        stepper?.cancel()
         objectWillChange.send()
 
         queuedSquares.removeAll()
@@ -176,9 +182,10 @@ class Grid: ObservableObject {
         startSquare.moveCost = 0
 
         // step through the route algorithm until there is nothing left to check
-        while queuedSquares.isEmpty == false {
-            stepRoute()
-        }
+        stepper = DispatchQueue.main.schedule(after: .init(.now()), interval: 0.05, stepRoute)
+//        while queuedSquares.isEmpty == false {
+//            stepRoute()
+//        }
     }
 
     /// A single step in the process of finding the route, checks the first queues square and calls the flood fill algorithm on it if needed
@@ -227,6 +234,8 @@ class Grid: ObservableObject {
 
     /// Checks the path array to see if a route was found
     func selectRoute() {
+        stepper?.cancel()
+
         // check if a route was found, if endSquares moveCost is still -1, then there is no route
         guard endSquare.moveCost != -1 else {
             print("No route possible!")
