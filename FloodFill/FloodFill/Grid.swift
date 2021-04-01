@@ -46,9 +46,9 @@ class Grid: ObservableObject {
 
         // First set all squares other than start and end to walls
         for row in squares {
-            for col in row {
-                if col == startSquare || col == endSquare { continue }
-                col.isWall = true
+            for square in row {
+                if square == startSquare || square == endSquare { continue }
+                square.isWall = true
             }
         }
 
