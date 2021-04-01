@@ -123,7 +123,7 @@ class Grid: ObservableObject {
     /// - Parameters:
     ///   - row: The row to place the wall
     ///   - col: The column to place the wall
-    func placeWall(at row: Int, col: Int) {
+    func placeWall(atRow row: Int, col: Int) {
         guard squares[row][col].isWall == false else { return }
 
         objectWillChange.send()
@@ -142,7 +142,7 @@ class Grid: ObservableObject {
     }
 
 
-    // TODO: - add functions
+    // MARK: - Route related functions
     func clear() {
         // TODO: - add code
     }
