@@ -14,6 +14,11 @@ class Grid: ObservableObject {
     var startSquare: Square
     var endSquare: Square
 
+    // Variables for scanning neighbors
+    var queuedSquares = [Square]()
+    var checkedSquares = [Square]()
+    var path = [Square]()
+
     init() {
         var grid = [[Square]]()
 
@@ -143,11 +148,109 @@ class Grid: ObservableObject {
 
 
     // MARK: - Route related functions
+    /// Wipes the temporary arrays used for finding a route
     func clear() {
-        // TODO: - add code
+        objectWillChange.send()
+
+        queuedSquares.removeAll()
+        checkedSquares.removeAll()
+        path.removeAll()
+
+        for row in squares {
+            for square in row {
+                square.moveCost = -1
+            }
+        }
     }
 
+    /// Sets up the route checking and starts stepping through the flood fill algorithm
     func route() {
-        // TODO: - add code
+        // clear existing route data
+        clear()
+
+        // add initial square to queue
+        queuedSquares.append(startSquare)
+        startSquare.moveCost = 0
+
+        // step through the route algorithm until there is nothing left to check
+        while queuedSquares.isEmpty == false {
+            stepRoute()
+        }
+    }
+
+    /// A single step in the process of finding the route, checks the first queues square and calls the flood fill algorithm on it if needed
+    func stepRoute() {
+        // notify SwiftUI of the upcoming change
+        objectWillChange.send()
+
+        // check the first square
+        let square = queuedSquares.removeFirst()
+        checkedSquares.append(square)
+
+        if square == endSquare {    // a route was found
+            selectRoute()
+            return
+        }
+
+        // queue up any possible squares near this one
+        floodFill(from: square)
+
+        if queuedSquares.isEmpty {
+            // all options were checked
+            selectRoute()
+        }
+    }
+
+    /// Checks all neighbors for a given square and updates the move cost if necessary
+    /// - Parameter square: The square for which to check its neighbors
+    func floodFill(from square: Square) {
+        // get all neighbors
+        let checkSquares = neighbors(for: square)
+
+        // check them
+        for checkSquare in checkSquares {
+            // walls are ignored
+            guard checkSquare.isWall == false else { continue }
+
+            // check if it worth moving to the square
+            if checkSquare.moveCost == -1 || square.moveCost + 1 < checkSquare.moveCost {
+                // update it's move cost
+                checkSquare.moveCost = square.moveCost + 1
+                // and add it to the list of squares to flood fill from
+                queuedSquares.append(checkSquare)
+            }
+        }
+    }
+
+    /// Checks the path array to see if a route was found
+    func selectRoute() {
+        // check if a route was found, if endSquares moveCost is still -1, then there is no route
+        guard endSquare.moveCost != -1 else {
+            print("No route possible!")
+            return
+        }
+
+        // go backwards from endSquare
+        path.append(endSquare)
+        var current = endSquare
+
+        // repeat until startSquare was reached
+        while current != startSquare {
+            // find all neighbors
+            for neighbor in neighbors(for: current) {
+                // skip over ignored squares
+                guard neighbor.moveCost != -1 else { continue }
+
+                // if this neighbor has a lower move cost than the current move cost, then add this to the path and move there
+                if neighbor.moveCost < current.moveCost {
+                    path.append(neighbor)
+                    current = neighbor
+
+                    // break out of the inner loop, to scan for neighbors from the new current square
+                    break
+                }
+            }
+        }
     }
 }
+
