@@ -45,3 +45,6 @@ A macOS command line app to explore ways to handle messy or unknown JSON in an e
 
 ## Trees
 Just a simple data type and it's binary version
+
+## FloodFill
+Exploring path finding via the FloodFill algorythm in a MacOS app
