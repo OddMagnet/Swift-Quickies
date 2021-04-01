@@ -106,10 +106,13 @@ class Grid: ObservableObject {
     /// - Parameter square: The square to get a color for
     /// - Returns: The fitting color for the square
     func color(for square: Square) -> Color {
-        if square == startSquare {      return .blue }
-        else if square == endSquare {   return .green }
-        else if square.isWall {         return .black }
-        else {                          return .gray }
+        if square == startSquare                {   return .blue                        }
+        else if square == endSquare             {   return .green                       }
+        else if square.isWall                   {   return .black                       }
+        else if path.contains(square)           {   return .white                       }
+        else if queuedSquares.contains(square)  {   return .orange                      }
+        else if checkedSquares.contains(square) {   return Color.orange.opacity(0.5)    }
+        else                                    {   return .gray                        }
     }
 
     // MARK: - Wall related functions
