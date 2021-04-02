@@ -13,12 +13,18 @@ extension CGPoint {
         Double(-atan2(-y, x))
     }
 
+    /// Returns the distance squared from a given point
+    /// - Parameter from: The point to calculate the distance from
+    /// - Returns: The distance aquared from the point
+    func distanceSquared(from: CGPoint) -> CGFloat {
+        (self.x - from.x) * (self.x - from.x) + (self.y - from.y) * (self.y - from.y)
+    }
+
     /// Returns the distance from a given point
     /// - Parameter from: The point to calculate the distance from
     /// - Returns: The distance from the point
     func distance(from: CGPoint) -> CGFloat {
-        let distanceSquared = (self.x - from.x) * (self.x - from.x) + (self.y - from.y) * (self.y - from.y)
-        return sqrt(distanceSquared)
+        sqrt(distanceSquared(from: from))
     }
 
     /// The length of the of the magnitude
