@@ -12,6 +12,7 @@ class Flock: ObservableObject {
     let height: CGFloat
 
     var boids = [Boid]()
+    var teamMode = false
 
     // Specialized timer to synchronize frame redraws
     var displayLink: CADisplayLink?

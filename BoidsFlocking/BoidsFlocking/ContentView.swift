@@ -16,7 +16,7 @@ struct ContentView: View {
             ForEach(flock.boids) { boid in
                 Triangle()
                     .rotation(.radians(boid.velocity.heading + (.pi / 2)))
-                    .fill(Color.red)
+                    .fill(flock.teamMode ? boid.color : .red)
                     .frame(width: 6, height: 12)
                     .position(x: boid.position.x, y: boid.position.y)
             }
@@ -47,6 +47,9 @@ struct ContentView: View {
         .background(Color(white: 0.2, opacity: 1))
         .frame(width: flock.width, height: flock.height)
         .ignoresSafeArea()
+        .onTapGesture {
+            flock.teamMode.toggle()
+        }
     }
 }
 

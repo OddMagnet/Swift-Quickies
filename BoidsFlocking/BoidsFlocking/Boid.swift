@@ -9,6 +9,7 @@ import SwiftUI
 
 class Boid: Identifiable {
     let id = UUID()
+    let color: Color = [.green, .white, .orange, .pink, .yellow].randomElement()!   // Team color
 
     var position: CGPoint           // current position
     var velocity: CGPoint           // current velocity, stored as CGPoint instead of CGVector to avoid constant conversion
@@ -131,6 +132,9 @@ class Boid: Identifiable {
     /// - Returns: The current boids neighbors and their distance from the current boid
     private func neighbors(in flock: Flock, distanceCutOff: CGFloat) -> [(boid: Boid, distance: CGFloat)] {
         flock.boids.compactMap { otherBoid in       // compactMap to sort out the nil values
+            // if team mode is enabled, sort out all boids of other teams as well
+            if flock.teamMode == true && self.color != otherBoid.color { return nil }
+
             let distance = position.distanceSquared(from: otherBoid.position)
 
             if distance > 0 && distance < distanceCutOff {
