@@ -98,7 +98,7 @@ class Boid: Identifiable {
         acceleration /= CGFloat(nearby.count)
 
         // return the steering adjusted velocity
-        return steer(velocity)
+        return steer(acceleration)
     }
 
     /// Calculates the boids coherence

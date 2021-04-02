@@ -29,18 +29,19 @@ class Flock: ObservableObject {
         for _ in 1...200 {
             let newBoid = Boid(x: CGFloat.random(in: 0 ..< width), y: CGFloat.random(in: 0 ..< height))
             boids.append(newBoid)
-
-            // setup the timer
-            displayLink = CADisplayLink(target: self, selector: #selector(update))
-            displayLink?.add(to: .current, forMode: .default)
         }
+
+        // setup the timer
+        displayLink = CADisplayLink(target: self, selector: #selector(update))
+        displayLink?.add(to: .current, forMode: .default)
     }
 
     // Update function that the timer calls
     @objc func update() {
         objectWillChange.send()
+        
         for boid in boids {
-            boid.run(in: self   )
+            boid.run(in: self)
         }
     }
 }
