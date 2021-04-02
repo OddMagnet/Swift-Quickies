@@ -43,6 +43,11 @@ extension CGPoint {
         }
     }
 
+    mutating func normalize() {
+        let len = distance(from: .zero)
+        self = CGPoint(x: self.x / len, y: self.y / len)
+    }
+
     // MARK: - Calculation helpers
     static func *=(lhs: inout CGPoint, rhs: CGFloat) {
         lhs.x *= rhs
