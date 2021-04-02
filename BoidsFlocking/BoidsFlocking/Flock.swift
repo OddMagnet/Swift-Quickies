@@ -16,9 +16,13 @@ class Flock: ObservableObject {
     // Specialized timer to synchronize frame redraws
     var displayLink: CADisplayLink?
 
-    init(width: CGFloat, height: CGFloat) {
+    // Behaviour settings
+    @Published var seperation: Double
+
+    init(width: CGFloat, height: CGFloat, seperation: Double) {
         self.width = width
         self.height = height
+        self.seperation = seperation
 
         // create some boids
         for _ in 1...200 {
@@ -35,7 +39,7 @@ class Flock: ObservableObject {
     @objc func update() {
         objectWillChange.send()
         for boid in boids {
-            boid.run(in: self)
+            boid.run(in: self   )
         }
     }
 }
