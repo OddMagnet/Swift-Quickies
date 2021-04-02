@@ -65,4 +65,38 @@ class Boid: Identifiable {
     private func cohere(to flock: Flock) -> CGPoint {
         .zero
     }
+
+    // MARK: - Helper functions
+    /// Get all neighbors with their distance to the current boid
+    /// - Parameters:
+    ///   - flock: The flock to search in
+    ///   - distanceCutOff: The maximal search distance
+    /// - Returns: The current boids neighbors and their distance from the current boid
+    private func neighbors(in flock: Flock, distanceCutOff: CGFloat) -> [(boid: Boid, distance: CGFloat)] {
+        flock.boids.compactMap { otherBoid in       // compactMap to sort out the nil values
+            let distance = position.distanceSquared(from: otherBoid.position)
+
+            if distance > 0 && distance < distanceCutOff {
+                return (otherBoid, distance)
+            } else {
+                return nil
+            }
+        }
+    }
+
+    /// Returns a steering adjustment based on an acceleration
+    /// - Parameter acceleration: The acceleration as a CGPoint
+    /// - Returns: The calculated steering adjustment
+    private func steer(_ acceleration: CGPoint) -> CGPoint {
+        var acceleration = acceleration
+
+        acceleration.normalize()            // normalize the acceleration
+        acceleration *= maximumSpeed        // multiply by maximumSpeed, so the length increases
+        acceleration -= velocity            // subtract current velocity for gradual change
+
+        let maximumSteer: CGFloat = 0.04    // and limit the steer of the acceleration
+        acceleration.limit(to: maximumSteer)
+
+        return acceleration
+    }
 }
