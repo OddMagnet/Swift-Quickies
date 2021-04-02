@@ -17,12 +17,11 @@ class Flock: ObservableObject {
     var displayLink: CADisplayLink?
 
     // Behaviour settings
-    @Published var seperation: Double
+    @Published var seperation: CGFloat = 1.5
 
-    init(width: CGFloat, height: CGFloat, seperation: Double) {
+    init(width: CGFloat, height: CGFloat) {
         self.width = width
         self.height = height
-        self.seperation = seperation
 
         // create some boids
         for _ in 1...200 {

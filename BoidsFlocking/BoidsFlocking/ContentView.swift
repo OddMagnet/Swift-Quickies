@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     // Just for preview purposes the flocks size is set to the dimensions of the 12 pro max (@3x)
-    @StateObject private var flock = Flock(width: 428, height: 926, seperation: 1.5)
+    @StateObject private var flock = Flock(width: 428, height: 926)
 
     var body: some View {
         ZStack {
