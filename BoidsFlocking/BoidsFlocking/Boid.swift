@@ -55,7 +55,24 @@ class Boid: Identifiable {
     }
 
     private func separate(from flock: Flock) -> CGPoint {
-        .zero
+        // find all neighbors up to 30^2 points away from the current boid
+        let nearby = neighbors(in: flock, distanceCutOff: 900)
+
+        // no neighbors? no adjustment
+        guard nearby.count > 0 else { return .zero }
+
+        // calculate (sum up) the adjustment, taking into account distance difference
+        var acceleration = nearby.reduce(CGPoint.zero) {
+            var difference = position - $1.boid.position        // get distance between the boids
+            difference /= $1.distance                           // divide by the distance, so further boids have less impact
+            return $0 + difference                              // add to the sum
+        }
+
+        // get mean average
+        acceleration /= CGFloat(nearby.count)
+
+        // return the steering adjusted acceleration
+        return steer(acceleration)
     }
 
     private func align(to flock: Flock) -> CGPoint {
