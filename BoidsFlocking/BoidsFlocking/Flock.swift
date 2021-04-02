@@ -34,6 +34,8 @@ class Flock: ObservableObject {
     // Update function that the timer calls
     @objc func update() {
         objectWillChange.send()
-        // TODO: Add updating code
+        for boid in boids {
+            boid.run(in: self)
+        }
     }
 }
