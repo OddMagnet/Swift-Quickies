@@ -11,6 +11,8 @@
 		4CEE2D4B26175F22009AAAAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE2D4A26175F22009AAAAD /* ContentView.swift */; };
 		4CEE2D4D26175F24009AAAAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE2D4C26175F24009AAAAD /* Assets.xcassets */; };
 		4CEE2D5026175F24009AAAAD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CEE2D4F26175F24009AAAAD /* Preview Assets.xcassets */; };
+		4CEE2D5A26175F80009AAAAD /* Boid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE2D5926175F80009AAAAD /* Boid.swift */; };
+		4CEE2D5E261760D5009AAAAD /* Flock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE2D5D261760D5009AAAAD /* Flock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		4CEE2D4C26175F24009AAAAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CEE2D4F26175F24009AAAAD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4CEE2D5126175F24009AAAAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CEE2D5926175F80009AAAAD /* Boid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boid.swift; sourceTree = "<group>"; };
+		4CEE2D5D261760D5009AAAAD /* Flock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				4CEE2D4826175F22009AAAAD /* BoidsFlockingApp.swift */,
 				4CEE2D4A26175F22009AAAAD /* ContentView.swift */,
+				4CEE2D5926175F80009AAAAD /* Boid.swift */,
+				4CEE2D5D261760D5009AAAAD /* Flock.swift */,
 				4CEE2D4C26175F24009AAAAD /* Assets.xcassets */,
 				4CEE2D5126175F24009AAAAD /* Info.plist */,
 				4CEE2D4E26175F24009AAAAD /* Preview Content */,
@@ -138,6 +144,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CEE2D5A26175F80009AAAAD /* Boid.swift in Sources */,
+				4CEE2D5E261760D5009AAAAD /* Flock.swift in Sources */,
 				4CEE2D4B26175F22009AAAAD /* ContentView.swift in Sources */,
 				4CEE2D4926175F22009AAAAD /* BoidsFlockingApp.swift in Sources */,
 			);
