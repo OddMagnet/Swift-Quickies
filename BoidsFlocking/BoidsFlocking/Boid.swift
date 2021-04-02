@@ -54,6 +54,7 @@ class Boid: Identifiable {
         var acceleration = separate(from: flock) * flock.seperation
         acceleration += align(to: flock) * flock.align
         acceleration += cohere(to: flock) * flock.cohere
+        acceleration += avoid(flock.obstacle) * 10
         return acceleration
     }
 
@@ -121,6 +122,18 @@ class Boid: Identifiable {
         acceleration -= position
 
         // return the steering adjusted coherence
+        return steer(acceleration)
+    }
+
+    private func avoid(_ obstacle: CGPoint) -> CGPoint {
+        let distance = position.distanceSquared(from: obstacle)
+        let distanceCutOff: CGFloat = 750
+
+        guard distance < distanceCutOff else { return .zero }
+
+        var acceleration = position - obstacle
+        acceleration /= distance
+
         return steer(acceleration)
     }
 

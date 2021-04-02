@@ -13,6 +13,7 @@ class Flock: ObservableObject {
 
     var boids = [Boid]()
     var teamMode = false
+    var obstacle: CGPoint
 
     // Specialized timer to synchronize frame redraws
     var displayLink: CADisplayLink?
@@ -25,6 +26,7 @@ class Flock: ObservableObject {
     init(width: CGFloat, height: CGFloat) {
         self.width = width
         self.height = height
+        obstacle = CGPoint(x: width / 2, y: height / 2)
 
         // create some boids
         for _ in 1...200 {

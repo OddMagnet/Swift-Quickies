@@ -20,6 +20,11 @@ struct ContentView: View {
                     .frame(width: 6, height: 12)
                     .position(x: boid.position.x, y: boid.position.y)
             }
+            Circle()    // Obstacle
+                .fill(Color.blue)
+                .frame(width: 25, height: 25)
+                .position(flock.obstacle)
+
 
             VStack {
                 Spacer()
@@ -28,25 +33,32 @@ struct ContentView: View {
                     Spacer()
                     VStack {
                         Text("Seperation: \(flock.seperation, specifier: "%.2f")")
-                        Slider(value: $flock.seperation, in: 0.5...2.5)
+                        Slider(value: $flock.seperation, in: 1.0...2.5)
                     }
                     VStack {
                         Text("Align: \(flock.align, specifier: "%.2f")")
-                        Slider(value: $flock.align, in: 0.5...2.5)
+                        Slider(value: $flock.align, in: 0.5...2.0)
                     }
                     VStack {
                         Text("Cohere: \(flock.cohere, specifier: "%.2f")")
-                        Slider(value: $flock.cohere, in: 0.5...2.5)
+                        Slider(value: $flock.cohere, in: 0.5...2.0)
                     }
                     Spacer()
                 }
-                .padding(.bottom, 20)
+                .foregroundColor(.blue)
+                .padding(.bottom, 50)
                 .background(Color.white)
             }
         }
         .background(Color(white: 0.2, opacity: 1))
         .frame(width: flock.width, height: flock.height)
         .ignoresSafeArea()
+        .gesture(
+            DragGesture(minimumDistance: 10)
+                .onChanged { value in
+                    flock.obstacle = value.location
+                }
+        )
         .onTapGesture {
             flock.teamMode.toggle()
         }
