@@ -13,6 +13,30 @@ extension CGPoint {
         Double(-atan2(-y, x))
     }
 
+    /// Returns the distance from a given point
+    /// - Parameter from: The point to calculate the distance from
+    /// - Returns: The distance from the point
+    func distance(from: CGPoint) -> CGFloat {
+        let distanceSquared = (self.x - from.x) * (self.x - from.x) + (self.y - from.y) * (self.y - from.y)
+        return sqrt(distanceSquared)
+    }
+
+    /// The length of the of the magnitude
+    var magnitude: CGFloat {
+        distance(from: .zero)
+    }
+
+    /// Limits the value to a given maximum
+    /// - Parameter max: The given maximum
+    mutating func limit(to max: CGFloat) {
+        let length = magnitude
+
+        if length > max {
+            x *= max / length
+            y *= max / length
+        }
+    }
+
     // MARK: - Calculation helpers
     static func *=(lhs: inout CGPoint, rhs: CGFloat) {
         lhs.x *= rhs
