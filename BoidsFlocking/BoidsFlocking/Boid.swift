@@ -80,10 +80,12 @@ class Boid: Identifiable {
         return steer(acceleration)
     }
 
+    /// Calculates the boids alignment
+    /// - Parameter flock: The flock to calculate for
+    /// - Returns: The adjustment needed to align as a CGPoint
     private func align(to flock: Flock) -> CGPoint {
         // find all neighbors up to 50^2 points away from the current boid
         let nearby = neighbors(in: flock, distanceCutOff: 2500)
-
         // no neighbors? no adjustment
         guard nearby.count > 0 else { return .zero }
 
@@ -99,8 +101,26 @@ class Boid: Identifiable {
         return steer(velocity)
     }
 
+    /// Calculates the boids coherence
+    /// - Parameter flock: The flock to calculate for
+    /// - Returns: The adjustment needed to cohere as a CGPoint
     private func cohere(to flock: Flock) -> CGPoint {
-        .zero
+        // find all neighbors up to 50^2 points away from the current boid
+        let nearby = neighbors(in: flock, distanceCutOff: 2500)
+        // no neighbors? no adjustment
+        guard nearby.count > 0 else { return .zero }
+
+        // calculate total position
+        var acceleration = nearby.reduce(CGPoint.zero) {
+            $0 + $1.boid.position
+        }
+
+        // get mean average and subtract own position
+        acceleration /= CGFloat(nearby.count)
+        acceleration -= position
+
+        // return the steering adjusted coherence
+        return steer(acceleration)
     }
 
     // MARK: - Helper functions
