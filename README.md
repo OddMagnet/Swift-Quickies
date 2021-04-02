@@ -48,3 +48,6 @@ Just a simple data type and it's binary version
 
 ## FloodFill
 Exploring path finding via the FloodFill algorythm in a MacOS app
+
+## BoidsFlocking
+Implementing Craig Reynoulds Boid algorithm in Swift
