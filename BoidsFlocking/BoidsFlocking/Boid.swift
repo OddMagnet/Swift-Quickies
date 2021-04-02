@@ -51,6 +51,8 @@ class Boid: Identifiable {
     // MARK: - Flocking behaviours
     private func calculateAcceleration(with flock: Flock) -> CGPoint {
         var acceleration = separate(from: flock) * flock.seperation
+        acceleration += align(to: flock) * flock.align
+        acceleration += cohere(to: flock) * flock.cohere
         return acceleration
     }
 

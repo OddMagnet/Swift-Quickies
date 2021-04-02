@@ -18,6 +18,8 @@ class Flock: ObservableObject {
 
     // Behaviour settings
     @Published var seperation: CGFloat = 1.5
+    @Published var align: CGFloat = 1.0
+    @Published var cohere: CGFloat = 1.0
 
     init(width: CGFloat, height: CGFloat) {
         self.width = width

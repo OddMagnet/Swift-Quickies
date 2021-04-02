@@ -28,15 +28,15 @@ struct ContentView: View {
                     Spacer()
                     VStack {
                         Text("Seperation: \(flock.seperation, specifier: "%.2f")")
-                        Slider(value: $flock.seperation, in: 1...2)
+                        Slider(value: $flock.seperation, in: 0.5...2.5)
                     }
                     VStack {
-                        Text("PLACEHOLDER: \(flock.seperation, specifier: "%.2f")")
-                        Slider(value: $flock.seperation, in: 1...2)
+                        Text("Align: \(flock.align, specifier: "%.2f")")
+                        Slider(value: $flock.align, in: 0.5...2.5)
                     }
                     VStack {
-                        Text("PLACEHOLDER: \(flock.seperation, specifier: "%.2f")")
-                        Slider(value: $flock.seperation, in: 1...2)
+                        Text("Cohere: \(flock.cohere, specifier: "%.2f")")
+                        Slider(value: $flock.cohere, in: 0.5...2.5)
                     }
                     Spacer()
                 }
