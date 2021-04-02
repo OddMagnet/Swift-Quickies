@@ -56,6 +56,9 @@ class Boid: Identifiable {
         return acceleration
     }
 
+    /// Calculates the adjustment needed to separate
+    /// - Parameter flock: The flock to calculate for
+    /// - Returns: The adjustment needed to separate as a CGPoint
     private func separate(from flock: Flock) -> CGPoint {
         // find all neighbors up to 30^2 points away from the current boid
         let nearby = neighbors(in: flock, distanceCutOff: 900)
@@ -78,7 +81,22 @@ class Boid: Identifiable {
     }
 
     private func align(to flock: Flock) -> CGPoint {
-        .zero
+        // find all neighbors up to 50^2 points away from the current boid
+        let nearby = neighbors(in: flock, distanceCutOff: 2500)
+
+        // no neighbors? no adjustment
+        guard nearby.count > 0 else { return .zero }
+
+        // calculate the total velocity
+        var acceleration = nearby.reduce(CGPoint.zero) {
+            $0 + $1.boid.velocity
+        }
+
+        // get mean average
+        acceleration /= CGFloat(nearby.count)
+
+        // return the steering adjusted velocity
+        return steer(velocity)
     }
 
     private func cohere(to flock: Flock) -> CGPoint {
