@@ -47,7 +47,10 @@ A macOS command line app to explore ways to handle messy or unknown JSON in an e
 Just a simple data type and it's binary version
 
 ## FloodFill
-Exploring path finding via the FloodFill algorythm in a MacOS app
+Exploring path finding via the FloodFill algoryithm in a MacOS app
 
 ## BoidsFlocking
 Implementing Craig Reynoulds Boid algorithm in Swift
+
+## AStar
+Further exploring path finding via the A* algorithm in a MacOS app
