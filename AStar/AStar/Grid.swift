@@ -196,8 +196,14 @@ class Grid: ObservableObject {
         // sort the squares based on estimated distance
         queuedSquares.sort { firstSquare, secondSquare in
             let firstHeuristic = estimatedDistance(from: firstSquare, to: endSquare)
+            let firstDistance = firstSquare.moveCost
+            let firstCost = firstHeuristic + firstDistance
+
             let secondHeuristic = estimatedDistance(from: secondSquare, to: endSquare)
-            return firstHeuristic < secondHeuristic
+            let secondDistance = secondSquare.moveCost
+            let secondCost = secondHeuristic + secondDistance
+
+            return firstCost < secondCost
         }
         // check the first square
         let square = queuedSquares.removeFirst()
