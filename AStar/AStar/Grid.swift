@@ -9,13 +9,18 @@ import SwiftUI
 import Combine
 
 class Grid: ObservableObject {
+    // MARK: - Private weight properties
+    private let heuristicWeight = 2
+    private let moveCostWeight = 1
+
+    // MARK: - General properties
     static let size = 20        // amount of rows and columns
 
     let squares: [[Square]]     // 2 dimensional array, representing the map
     var startSquare: Square
     var endSquare: Square
 
-    // Variables for scanning neighbors
+    // Variables for scanning neighbours
     var queuedSquares = [Square]()
     var checkedSquares = [Square]()
     var path = [Square]()
@@ -195,14 +200,17 @@ class Grid: ObservableObject {
 
         // sort the squares based on estimated distance
         queuedSquares.sort { firstSquare, secondSquare in
-            let firstHeuristic = estimatedDistance(from: firstSquare, to: endSquare)
-            let firstDistance = firstSquare.moveCost
+            let firstHeuristic = estimatedDistance(from: firstSquare, to: endSquare) * heuristicWeight
+            let firstDistance = firstSquare.moveCost * moveCostWeight
             let firstCost = firstHeuristic + firstDistance
 
-            let secondHeuristic = estimatedDistance(from: secondSquare, to: endSquare)
-            let secondDistance = secondSquare.moveCost
+            let secondHeuristic = estimatedDistance(from: secondSquare, to: endSquare) * heuristicWeight
+            let secondDistance = secondSquare.moveCost * moveCostWeight
             let secondCost = secondHeuristic + secondDistance
 
+            // Sorting just between heuristics results in a naive approach which doesn't account for a slight detour that would result in a much shorter route
+            // adding the move cost stops the algorithm from going for long detours when a slight one would be much better
+            // finally, having the heuristic weighted more stops the algorithm from checking squares that would otherwise have an equal cost
             return firstCost < secondCost
         }
         // check the first square
