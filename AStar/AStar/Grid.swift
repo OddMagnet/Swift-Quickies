@@ -264,5 +264,17 @@ class Grid: ObservableObject {
             }
         }
     }
+
+    // MARK: - Distance related functions
+    /// Uses the Chebyshev algorithm to estimate the distance between two squares
+    /// - Parameters:
+    ///   - a: The first square
+    ///   - b: The second square
+    /// - Returns: The estimated distance between the squares as an Int
+    func estimatedDistance(from a: Square, to b: Square) -> Int {
+        let xDistance = abs(a.col - b.col)
+        let yDistance = abs(a.row - b.row)
+        return max(xDistance, yDistance)
+    }
 }
 
