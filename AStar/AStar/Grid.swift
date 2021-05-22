@@ -193,6 +193,12 @@ class Grid: ObservableObject {
         // notify SwiftUI of the upcoming change
         objectWillChange.send()
 
+        // sort the squares based on estimated distance
+        queuedSquares.sort { firstSquare, secondSquare in
+            let firstHeuristic = estimatedDistance(from: firstSquare, to: endSquare)
+            let secondHeuristic = estimatedDistance(from: secondSquare, to: endSquare)
+            return firstHeuristic < secondHeuristic
+        }
         // check the first square
         let square = queuedSquares.removeFirst()
         checkedSquares.append(square)
