@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.dismiss) var dismiss
+
     let features = [
         Feature(title: "Great feature", description: "This one is great, you're going to love using it so much.", image: "pencil.circle"),
         Feature(title: "Second feature", description: "If you liked the first one, wait until you see this.", image: "sun.max"),
@@ -39,6 +41,16 @@ struct ContentView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)// ensure text is perfectly aligned, even when shorter
             }
+
+            Text("Any important small print here")
+                .font(.footnote)
+                .foregroundColor(.secondary)
+
+            Button("Continue") { dismiss() }
+                .frame(maxWidth: .infinity, minHeight: 44)  // Apples recommended minimum size for touch controls
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
         }
         .padding()
     }
