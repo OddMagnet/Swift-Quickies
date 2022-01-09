@@ -23,10 +23,10 @@ struct ContentView: View {
             ForEach(features) { feature in
                 HStack {
                     Image(systemName: feature.image)
-                        .frame(width: 44)
+                        .frame(width: 44)           // SF symbols have slightly varying sizes, ensure they're the same width
                         .font(.title)
                         .foregroundColor(.blue)
-                        .accessibilityHidden(true)
+                        .accessibilityHidden(true)  // hide from screen readers, since they're decorative
 
                     VStack(alignment: .leading) {
                         Text(feature.title)
@@ -35,9 +35,9 @@ struct ContentView: View {
                         Text(feature.description)
                             .foregroundColor(.secondary)
                     }
-                    .accessibilityElement(children: .combine)
+                    .accessibilityElement(children: .combine)   // should be read together by screen readers
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .leading)// ensure text is perfectly aligned, even when shorter
             }
         }
         .padding()
