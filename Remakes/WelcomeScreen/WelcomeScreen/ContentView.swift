@@ -20,6 +20,14 @@ struct ContentView: View {
         VStack(spacing: 20) {   // outer spacing affects small print and continue button
             ScrollView {
                 VStack(spacing: 20) {   // inner spacing affects welcome and feature text
+                    // No Idea why this code does not work
+//                    Image(decorative: "AppIcon")
+//                        .cornerRadius(10)
+                    // The UIKit variant seems to work fine
+                    Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
+                        .cornerRadius(10)
+                        .accessibilityHidden(true)
+
                     (Text("Welcome to ") + Text("OddTracker").foregroundColor(.accentColor))
                         .multilineTextAlignment(.center)
                         .font(.largeTitle.bold())
