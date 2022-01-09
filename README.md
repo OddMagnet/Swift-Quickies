@@ -22,11 +22,8 @@ As seen in other languages like C++ and Ruby, just for fun
 ## PersonNameComponentsFormatter?
 Exploring the formatter for names that Apple provides
 
-## Lockscreen?
-Simply to practice building UIs based on a reference
-
-## Tipps?
-Same as Lockscreen
+## Remakes?
+Simply to practice building UIs based on a reference, mostly based on already existing iOS App/Components
 
 ## Boxing
 To experiment witht the concept of boxing by building a very simple box, adding back some lost as well as new functionality and mapping
