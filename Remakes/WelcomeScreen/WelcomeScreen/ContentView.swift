@@ -20,7 +20,7 @@ struct ContentView: View {
         VStack(spacing: 20) {   // outer spacing affects small print and continue button
             ScrollView {
                 VStack(spacing: 20) {   // inner spacing affects welcome and feature text
-                    Text("Welcome to OddTracker")
+                    (Text("Welcome to ") + Text("OddTracker").foregroundColor(.accentColor))
                         .multilineTextAlignment(.center)
                         .font(.largeTitle.bold())
 
@@ -29,7 +29,7 @@ struct ContentView: View {
                             Image(systemName: feature.image)
                                 .frame(width: 44)           // SF symbols have slightly varying sizes, ensure they're the same width
                                 .font(.title)
-                                .foregroundColor(.blue)
+                                .foregroundColor(.accentColor)
                                 .accessibilityHidden(true)  // hide from screen readers, since they're decorative
 
                             VStack(alignment: .leading) {
@@ -52,7 +52,7 @@ struct ContentView: View {
 
             Button("Continue") { dismiss() }
                 .frame(maxWidth: .infinity, minHeight: 44)  // Apples recommended minimum size for touch controls
-                .background(Color.blue)
+                .background(Color.accentColor)
                 .foregroundColor(.white)
                 .cornerRadius(10)
         }
@@ -63,6 +63,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .accentColor(Color(red: 0, green: 0.9, blue: 0, opacity: 1))
             .preferredColorScheme(.light)
     }
 }
